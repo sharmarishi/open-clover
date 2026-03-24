@@ -33,30 +33,31 @@ function DayPartIcon({ part }: { part: string }) {
 
 function MenuItemCard({ item, onToggle }: { item: MenuItem; onToggle: (id: string) => void }) {
   const channelCount = Object.values(item.channels).filter(Boolean).length;
+  void channelCount;
   return (
     <div className={clsx(
-      "bg-gray-900 border rounded-xl p-4 transition-colors",
-      item.available ? "border-gray-800 hover:border-gray-600" : "border-red-500/20 opacity-70"
+      "bg-white border rounded-xl p-4 transition-colors",
+      item.available ? "border-gray-200 hover:border-gray-300" : "border-red-200 opacity-75"
     )}>
       <div className="flex items-start justify-between mb-2">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-white text-sm leading-tight">{item.name}</span>
+            <span className="font-semibold text-gray-900 text-sm leading-tight">{item.name}</span>
             {!item.available && (
-              <span className="flex items-center gap-1 text-[10px] text-red-400 bg-red-500/10 px-1.5 py-0.5 rounded-full">
+              <span className="flex items-center gap-1 text-[10px] text-red-600 bg-red-50 px-1.5 py-0.5 rounded-full">
                 <AlertCircle className="w-2.5 h-2.5" /> 86&apos;d
               </span>
             )}
           </div>
-          <div className="text-xs text-violet-400 mt-0.5">{item.category}</div>
+          <div className="text-xs text-indigo-600 mt-0.5">{item.category}</div>
         </div>
         <div className="text-right flex-shrink-0 ml-3">
-          <div className="text-sm font-bold text-white">${item.price.toFixed(2)}</div>
-          {item.variants && <div className="text-xs text-gray-500">{item.variants.length} sizes</div>}
+          <div className="text-sm font-bold text-gray-900">${item.price.toFixed(2)}</div>
+          {item.variants && <div className="text-xs text-gray-400">{item.variants.length} sizes</div>}
         </div>
       </div>
 
-      <p className="text-xs text-gray-400 mb-3 leading-relaxed line-clamp-2">{item.description}</p>
+      <p className="text-xs text-gray-500 mb-3 leading-relaxed line-clamp-2">{item.description}</p>
 
       {/* Day Parts */}
       <div className="flex items-center gap-1.5 mb-2.5">
@@ -64,10 +65,10 @@ function MenuItemCard({ item, onToggle }: { item: MenuItem; onToggle: (id: strin
           <span
             key={part}
             className={clsx("flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full", {
-              "bg-amber-500/15 text-amber-400": item.dayParts.includes(part) && part === "breakfast",
-              "bg-blue-500/15 text-blue-400": item.dayParts.includes(part) && part === "lunch",
-              "bg-violet-500/15 text-violet-400": item.dayParts.includes(part) && part === "dinner",
-              "bg-gray-800 text-gray-600": !item.dayParts.includes(part),
+              "bg-amber-50 text-amber-700": item.dayParts.includes(part) && part === "breakfast",
+              "bg-blue-50 text-blue-700": item.dayParts.includes(part) && part === "lunch",
+              "bg-indigo-50 text-indigo-700": item.dayParts.includes(part) && part === "dinner",
+              "bg-gray-100 text-gray-400": !item.dayParts.includes(part),
             })}
           >
             <DayPartIcon part={part} />
@@ -78,13 +79,13 @@ function MenuItemCard({ item, onToggle }: { item: MenuItem; onToggle: (id: strin
 
       {/* Channels */}
       <div className="flex items-center gap-1.5 mb-3">
-        <Globe className="w-3 h-3 text-gray-500" />
+        <Globe className="w-3 h-3 text-gray-400" />
         {channels.map(({ key, label }) => (
           <span
             key={key}
             className={clsx("text-[10px] px-1.5 py-0.5 rounded-full", {
-              "bg-emerald-500/15 text-emerald-400": item.channels[key as keyof MenuItem["channels"]],
-              "bg-gray-800 text-gray-600 line-through": !item.channels[key as keyof MenuItem["channels"]],
+              "bg-emerald-50 text-emerald-700": item.channels[key as keyof MenuItem["channels"]],
+              "bg-gray-100 text-gray-400 line-through": !item.channels[key as keyof MenuItem["channels"]],
             })}
           >
             {label}
@@ -95,12 +96,12 @@ function MenuItemCard({ item, onToggle }: { item: MenuItem; onToggle: (id: strin
       {/* Modifiers Preview */}
       {item.modifiers.length > 0 && (
         <div className="flex flex-wrap gap-1 mb-3">
-          <Tag className="w-3 h-3 text-gray-500 mt-0.5 flex-shrink-0" />
+          <Tag className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
           {item.modifiers.slice(0, 3).map((mod) => (
-            <span key={mod} className="text-[10px] text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded">{mod}</span>
+            <span key={mod} className="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">{mod}</span>
           ))}
           {item.modifiers.length > 3 && (
-            <span className="text-[10px] text-gray-600">+{item.modifiers.length - 3} more</span>
+            <span className="text-[10px] text-gray-400">+{item.modifiers.length - 3} more</span>
           )}
         </div>
       )}
@@ -108,10 +109,10 @@ function MenuItemCard({ item, onToggle }: { item: MenuItem; onToggle: (id: strin
       {/* Popularity */}
       <div className="mb-3">
         <div className="flex justify-between text-xs mb-1">
-          <span className="text-gray-500">Popularity</span>
-          <span className="text-gray-300">{item.popularity}%</span>
+          <span className="text-gray-400">Popularity</span>
+          <span className="text-gray-700">{item.popularity}%</span>
         </div>
-        <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
+        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
           <div
             className={clsx("h-full rounded-full", {
               "bg-emerald-500": item.popularity >= 80,
@@ -124,18 +125,18 @@ function MenuItemCard({ item, onToggle }: { item: MenuItem; onToggle: (id: strin
       </div>
 
       {/* Actions */}
-      <div className="flex items-center justify-between pt-3 border-t border-gray-800">
+      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
         <button
           onClick={() => onToggle(item.id)}
-          className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors"
+          className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-900 transition-colors"
         >
           {item.available ? (
-            <><ToggleRight className="w-4 h-4 text-emerald-400" /> Available</>
+            <><ToggleRight className="w-4 h-4 text-emerald-500" /> Available</>
           ) : (
             <><ToggleLeft className="w-4 h-4 text-red-400" /> Unavailable</>
           )}
         </button>
-        <button className="flex items-center gap-1 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+        <button className="flex items-center gap-1 text-xs text-indigo-600 hover:text-indigo-500 transition-colors">
           <Edit2 className="w-3 h-3" /> Edit
         </button>
       </div>
@@ -166,19 +167,19 @@ export default function MenuPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Menu Management</h1>
-          <p className="text-gray-400 text-sm mt-0.5">{items.length} items · {unavailableCount} unavailable</p>
+          <h1 className="text-2xl font-bold text-gray-900">Menu Management</h1>
+          <p className="text-gray-500 text-sm mt-0.5">{items.length} items · {unavailableCount} unavailable</p>
         </div>
-        <button className="flex items-center gap-2 text-sm bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg transition-colors">
+        <button className="flex items-center gap-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors">
           <Plus className="w-4 h-4" /> Add Item
         </button>
       </div>
 
       {/* Alerts */}
       {unavailableCount > 0 && (
-        <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 flex items-center gap-3">
-          <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0" />
-          <div className="text-sm text-red-300">
+        <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 flex items-center gap-3">
+          <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
+          <div className="text-sm text-red-700">
             <span className="font-semibold">{unavailableCount} menu item{unavailableCount > 1 ? "s" : ""} currently unavailable (86&apos;d).</span>
             {" "}Update availability or notify delivery platforms.
           </div>
@@ -188,12 +189,12 @@ export default function MenuPage() {
       {/* Filters */}
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search menu items..."
-            className="w-full bg-gray-900 border border-gray-700 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-violet-500"
+            className="w-full bg-white border border-gray-200 rounded-lg pl-9 pr-4 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-200"
           />
         </div>
         <div className="flex gap-2 flex-wrap">
@@ -204,8 +205,8 @@ export default function MenuPage() {
               className={clsx(
                 "px-3 py-1.5 text-xs rounded-lg border transition-colors",
                 category === cat
-                  ? "bg-violet-600 border-violet-600 text-white"
-                  : "bg-gray-900 border-gray-700 text-gray-400 hover:text-white hover:border-gray-600"
+                  ? "bg-indigo-600 border-indigo-600 text-white"
+                  : "bg-white border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-300"
               )}
             >
               {cat}
@@ -224,13 +225,13 @@ export default function MenuPage() {
               key={cat}
               onClick={() => setCategory(cat)}
               className={clsx(
-                "bg-gray-900 border rounded-xl p-3 text-left transition-colors",
-                category === cat ? "border-violet-500/40" : "border-gray-800 hover:border-gray-700"
+                "bg-white border rounded-xl p-3 text-left transition-colors",
+                category === cat ? "border-indigo-300 bg-indigo-50" : "border-gray-200 hover:border-gray-300"
               )}
             >
-              <div className="text-lg font-bold text-white">{count}</div>
-              <div className="text-xs text-gray-400">{cat}</div>
-              <div className="text-xs text-emerald-400 mt-0.5">{available} active</div>
+              <div className="text-lg font-bold text-gray-900">{count}</div>
+              <div className="text-xs text-gray-500">{cat}</div>
+              <div className="text-xs text-emerald-600 mt-0.5">{available} active</div>
             </button>
           );
         })}
@@ -242,7 +243,7 @@ export default function MenuPage() {
           <MenuItemCard key={item.id} item={item} onToggle={toggleAvailability} />
         ))}
         {filtered.length === 0 && (
-          <div className="col-span-3 text-center py-12 text-gray-500">
+          <div className="col-span-3 text-center py-12 text-gray-400">
             No menu items match your search.
           </div>
         )}
