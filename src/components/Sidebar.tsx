@@ -17,13 +17,13 @@ import {
 } from "lucide-react";
 
 const coreNav = [
-  { href: "/hardware", label: "Hardware", icon: Monitor },
   { href: "/payments", label: "Payments", icon: CreditCard },
   { href: "/orders", label: "Orders", icon: ClipboardList },
   { href: "/menu", label: "Menu", icon: UtensilsCrossed },
 ];
 
 const intelNav = [
+  { href: "/hardware", label: "Hardware", icon: Monitor },
   { href: "/delivery", label: "Delivery", icon: Truck },
   { href: "/erp", label: "ERP & Accounting", icon: Calculator },
   { href: "/inventory", label: "Inventory", icon: Package },
